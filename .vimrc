@@ -53,6 +53,19 @@ nmap <leader>v :vs ./<CR>
 "au VimEnter * map <tab> <esc>
 "au VimEnter * imap <tab> <esc>
 "au VimEnter * vmap <tab> <esc>
+"
+" vim-go config 
+" {
+autocmd FileType go nmap <Leader>d  <Plug>(goimports)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+let g:go_fmt_command = "goimports"
+" }
 
 
 
@@ -83,6 +96,7 @@ Plugin 'tpope/vim-fugitive'
 
 " Go Lang {
 Plugin 'fatih/vim-go'
+Plugin 'AndrewRadev/splitjoin.vim'
 " }
 
 " CPP {
