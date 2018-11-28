@@ -32,6 +32,7 @@ set term=ansi
 "let g:html_indent_script1 = "inc"   
 "let g:html_indent_style1 = "inc"  
 "let g:html_indent_inctags = "html,body,head,tbody"
+"set foldmethod=indent
 
 "======================"
 "        语法支持      "
@@ -65,8 +66,15 @@ map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 let g:go_fmt_command = "goimports"
+let g:go_gocode_propose_builtins = 1
+let g:go_gocode_propose_source = 1
 " }
 
+" rust config
+" {
+autocmd FileType rust nmap <leader>f :RustFmt<CR>
+autocmd FileType rust nmap <leader>t :RustFmt<CR>
+" }
 
 
 "======================"
@@ -97,6 +105,10 @@ Plugin 'tpope/vim-fugitive'
 " Go Lang {
 Plugin 'fatih/vim-go'
 Plugin 'AndrewRadev/splitjoin.vim'
+" }
+
+" Rust Lang {
+Plugin 'rust-lang/rust.vim'
 " }
 
 " CPP {
