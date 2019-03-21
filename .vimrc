@@ -1,45 +1,26 @@
 set number
 set nowrap
+set hlsearch
+set backspace=2
 set laststatus=2
-set autoindent 
 set expandtab
 set tabstop=4
-set incsearch
-set backspace=2
 set noswapfile
-set hlsearch
 set ts=4
 set sw=4
 
-
 let g:rehash256 = 1
 let g:molokai_original = 1
-
-"======================"
-"        FileHL        "
-"======================"
-filetype on 
-filetype plugin on
-syntax enable
-syntax on
 set term=ansi
-
+syntax on
 
 "======================"
 "        代码缩进      "
 "======================"
-"filetype indent on
-"let g:html_indent_script1 = "inc"   
-"let g:html_indent_style1 = "inc"  
-"let g:html_indent_inctags = "html,body,head,tbody"
-"set foldmethod=indent
+set foldmethod=indent
+set foldlevelstart=1
 
 "======================"
-"        语法支持      "
-"======================"
-let g:js_ext_required = 0
-let g:syntastic_javascript_checkers = ['eslint']
-
 "        KeyMap        "
 "======================"
 let mapleader=";"
@@ -51,99 +32,134 @@ nmap <leader>h <C-W>h
 nmap <leader>j <C-W>j
 nmap <leader>k <C-W>k
 nmap <leader>v :vs ./<CR>
-"au VimEnter * map <tab> <esc>
-"au VimEnter * imap <tab> <esc>
-"au VimEnter * vmap <tab> <esc>
-"
-" vim-go config 
-" {
-autocmd FileType go nmap <Leader>d  <Plug>(goimports)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
-autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
-let g:go_fmt_command = "goimports"
-let g:go_gocode_propose_builtins = 1
-let g:go_gocode_propose_source = 1
-" }
-
-" rust config
-" {
-autocmd FileType rust nmap <leader>f :RustFmt<CR>
-autocmd FileType rust nmap <leader>t :RustFmt<CR>
-" }
 
 
 "======================"
 " Vundle Configuration "
 "======================"
 set nocompatible
-filetype off
+filetype off 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-"函数列表"
+
+" 默认值
+Plugin 'tpope/vim-sensible'
+
+" 插件目录管理
+Plugin 'tpope/vim-pathogen'
+
+" 函数列表 {
 Plugin 'Tagbar' 
-"文件浏览"
+nmap <leader>f :TagbarToggle<CR>
+" }
+
+" 自动补全 {
+" Plugin 'zchee/deoplete-go'
+" }
+
+" 文件浏览"
 Plugin 'scrooloose/nerdtree'
-"代码段"
-" Plugin 'SirVer/ultisnips'
-"代码补全"
-"Plugin 'Valloric/YouCompleteMe'
-"状态栏"
+
+" 状态栏"
 Plugin 'Lokaltog/vim-powerline'
-"缩进关联"
+
+" 语法检查 {
+Plugin 'vim-syntastic/syntastic'
+function! ToggleErrors()
+    let old_last_winnr = winnr('$')
+    lclose
+    if old_last_winnr == winnr('$')
+        " Nothing was closed, open syntastic error location panel
+        Errors
+    endif
+endfunction
+nnoremap <Leader>s :call ToggleErrors()<cr>
+nnoremap <Leader>sn :lnext<cr>
+nnoremap <Leader>sp :lprevious<cr>
+" }
+
+" 同文件多类型支持
+Plugin 'tyru/caw.vim'
+
+Plugin 'scrooloose/nerdcommenter'
+
+" 代码段 {
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+" }
+
+" Full path fuzzy
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" 缩进查看 <Leader> ig {
 Plugin 'nathanaelkane/vim-indent-guides'
+" }
 
-"git"
+" git"
 Plugin 'tpope/vim-fugitive'
-
 
 " Go Lang {
 Plugin 'fatih/vim-go'
-Plugin 'AndrewRadev/splitjoin.vim'
+
+autocmd FileType go nmap <Leader>gi  <Plug>(go-imports)
+autocmd FileType go nmap <leader>gr  <Plug>(go-run)
+autocmd FileType go nmap <leader>gb  <Plug>(go-build)
+autocmd FileType go nmap <leader>gt  <Plug>(go-test)
+autocmd FileType go nmap <Leader>gc  <Plug>(go-coverage-toggle)
+autocmd FileType go nmap <Leader>gl  <Plug>(go-lint)
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <C-c> :cclose<CR>
+
+let g:go_fmt_command = "goimports"
+let g:go_gocode_propose_builtins = 1
+let g:go_gocode_propose_source = 1
+let go_fold=0
 " }
 
 " Rust Lang {
 Plugin 'rust-lang/rust.vim'
+Plugin 'webapi.vim'
 " }
 
 " CPP {
 Plugin 'octol/vim-cpp-enhanced-highlight'
 " }
 
+" JavaScript {
+Plugin 'elzr/vim-json'
+Plugin 'pangloss/vim-javascript'
+autocmd FileType javascript set tabstop=2
+autocmd FileType javascript set sw=2
+autocmd FileType javascript set ts=2
+
+let g:js_ext_required = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let javaScript_fold=1
+"
+
+" Vue {
+Plugin 'posva/vim-vue'
+autocmd FileType vue syntax sync fromstart
+autocmd FileType vue set tabstop=2
+autocmd FileType vue set sw=2
+autocmd FileType vue set ts=2
+let vue_fold=1
+
+" }
 
 " HTML {
-"Plugin 'amirh/HTML-AutoCloseTag'
-"Plugin 'hail2u/vim-css3-syntax'
-"Plugin 'gorodinskiy/vim-coloresque'
-"Plugin 'tpope/vim-haml'
-"Plugin 'mattn/emmet-vim'
-"Plugin 'jiangmiao/simple-javascript-indenter'
+Plugin 'amirh/HTML-AutoCloseTag'
+Plugin 'hail2u/vim-css3-syntax'
+autocmd FileType html set tabstop=2
+autocmd FileType html set sw=2
+autocmd FileType html set ts=2
+let html_fold=1
+let css_fold=1
 " }
 
-" Javascript {
-  Plugin 'elzr/vim-json'
-  Plugin 'groenewege/vim-less'
-  Plugin 'pangloss/vim-javascript'
-  Plugin 'briancollins/vim-jst'
-  Plugin 'kchmck/vim-coffee-script'
-  Plugin 'marijnh/tern_for_vim'
-  Plugin 'mxw/vim-jsx'
-  Plugin 'darthmall/vim-vue'
-  Plugin 'vim-scripts/jade.vim'
-" }
-"
-" Toml {
-" Plugin 'cespare/vim-toml'
-" }
-"
-" Lint Engine {
-Plugin 'w0rp/ale'
-" }
 
 call vundle#end()            
+call pathogen#infect()
 filetype plugin indent on
