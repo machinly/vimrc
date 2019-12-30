@@ -8,6 +8,7 @@ set tabstop=4
 set noswapfile
 set ts=4
 set sw=4
+set encoding=utf-8
 
 let g:rehash256 = 1
 let g:molokai_original = 1
@@ -113,8 +114,8 @@ map <C-m> :cprevious<CR>
 nnoremap <C-c> :cclose<CR>
 
 let g:go_fmt_command = "goimports"
-let g:go_gocode_propose_builtins = 1
-let g:go_gocode_propose_source = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 let go_fold=0
 " }
 
