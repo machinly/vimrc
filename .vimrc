@@ -10,9 +10,8 @@ set ts=4
 set sw=4
 set encoding=utf-8
 
-let g:rehash256 = 1
-let g:molokai_original = 1
-set term=ansi
+"let g:rehash256 = 1
+"let g:molokai_original = 1
 syntax on
 
 "======================"
@@ -47,9 +46,6 @@ Plugin 'VundleVim/Vundle.vim'
 " 默认值
 Plugin 'tpope/vim-sensible'
 
-" 插件目录管理
-Plugin 'tpope/vim-pathogen'
-
 " TODO-LIST {
 Plugin 'aserebryakov/vim-todo-lists'
 " }
@@ -61,15 +57,15 @@ nmap <leader>f :TagbarToggle<CR>
 " }
 
 " 自动补全 {
-" Plugin 'zchee/deoplete-go'
+Plugin 'github/copilot.vim'
 " }
 
 " 文件浏览"
 Plugin 'scrooloose/nerdtree'
 
-" 状态栏"
-Plugin 'Lokaltog/vim-powerline'
-
+"" 状态栏"
+"Plugin 'Lokaltog/vim-powerline'
+"
 " 语法检查 {
 Plugin 'vim-syntastic/syntastic'
 function! ToggleErrors()
@@ -101,6 +97,10 @@ Plugin 'ctrlpvim/ctrlp.vim'
 " 缩进查看 <Leader> ig {
 Plugin 'nathanaelkane/vim-indent-guides'
 " }
+"
+" protobuf" {
+"Plugin 'protocolbuffers/protobuf/editors/proto.vim'
+" }
 
 " git"
 Plugin 'tpope/vim-fugitive'
@@ -109,8 +109,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'buoto/gotests-vim'
 let g:gotests_bin = '/Users/xinma/go/bin/gotests'
 let g:gotests_template_dir = '/Users/xinma/templates/'
-
-
 
 Plugin 'fatih/vim-go'
 
@@ -134,6 +132,8 @@ autocmd FileType go nmap <leader>dt  <Plug>(go-debug-test)
 autocmd FileType go nmap <leader>dc  <Plug>(go-debug-continue)
 autocmd FileType go nmap <leader>db  <Plug>(go-debug-breakpoint)
 autocmd FileType go nmap <leader>de  <Plug>(go-debug-stop)
+autocmd FileType go nmap <leader>n   <Plug>(go-debug-next)
+autocmd FileType go nmap <leader>s   <Plug>(go-debug-step)
 
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
@@ -166,6 +166,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 let javaScript_fold=1
 "
 
+"" Toml {
+"Plugin 'cespare/vim-toml'
+"" }
+"
 " Vue {
 Plugin 'posva/vim-vue'
 autocmd FileType vue syntax sync fromstart
@@ -177,7 +181,7 @@ let vue_fold=1
 " }
 
 " HTML {
-" Plugin 'amirh/HTML-AutoCloseTag'
+Plugin 'amirh/HTML-AutoCloseTag'
 Plugin 'hail2u/vim-css3-syntax'
 autocmd FileType html set tabstop=2
 autocmd FileType html set sw=2
@@ -185,8 +189,7 @@ autocmd FileType html set ts=2
 let html_fold=1
 let css_fold=1
 " }
-
+" 
 
 call vundle#end()            
-call pathogen#infect()
 filetype plugin indent on
