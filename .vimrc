@@ -9,6 +9,8 @@ set noswapfile
 set ts=4
 set sw=4
 set encoding=utf-8
+set path+=**
+set wildmenu
 
 "let g:rehash256 = 1
 "let g:molokai_original = 1
@@ -87,8 +89,8 @@ Plugin 'tyru/caw.vim'
 Plugin 'scrooloose/nerdcommenter'
 
 " 代码段 {
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
 " }
 
 " Full path fuzzy
@@ -171,12 +173,12 @@ let javaScript_fold=1
 "" }
 "
 " Vue {
-Plugin 'posva/vim-vue'
-autocmd FileType vue syntax sync fromstart
-autocmd FileType vue set tabstop=2
-autocmd FileType vue set sw=2
-autocmd FileType vue set ts=2
-let vue_fold=1
+"Plugin 'posva/vim-vue'
+"autocmd FileType vue syntax sync fromstart
+"autocmd FileType vue set tabstop=2
+"autocmd FileType vue set sw=2
+"autocmd FileType vue set ts=2
+"let vue_fold=1
 
 " }
 
